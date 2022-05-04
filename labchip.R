@@ -13,7 +13,7 @@ invisible(lapply(packages, library, character.only = TRUE))
 setwd(dirname(rstudioapi::getSourceEditorContext()$path))
 wd <- dirname(rstudioapi::getSourceEditorContext()$path)                             #get current directory
 in.dir <- list.files(paste(wd), pattern = "PeakTable", full.names = TRUE)            #list all PeakTable files
-source("labchip_config.R")                                                           #source config file
+source("config.R")                                                           #source config file
 
 #read files ----
 labchip <- lapply(in.dir, read.csv)
