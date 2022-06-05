@@ -12,11 +12,12 @@ invisible(lapply(packages, library, character.only = TRUE))
 #get wds ----
 setwd(dirname(rstudioapi::getSourceEditorContext()$path))
 wd <- dirname(rstudioapi::getSourceEditorContext()$path)                             #get current directory
-in.dir <- list.files(paste(wd), pattern = "PeakTable", full.names = TRUE)            #list all PeakTable files
+in.dir <- in.dir <- paste(wd, 'input', sep="/")
+in.files <- list.files(paste(in.dir), pattern = "PeakTable", full.names = TRUE)            #list all PeakTable files
 source("config.R")                                                           #source config file
 
 #read files ----
-labchip <- lapply(in.dir, read.csv)
+labchip <- lapply(in.files, read.csv)
 
 labchip <- rbindlist(labchip, idcol = "id")
 samples <- unique(labchip$`Sample Name`)
