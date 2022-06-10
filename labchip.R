@@ -12,7 +12,7 @@ invisible(lapply(packages, library, character.only = TRUE))
 #get wds ----
 setwd(dirname(rstudioapi::getSourceEditorContext()$path))
 wd <- dirname(rstudioapi::getSourceEditorContext()$path)                             #get current directory
-in.dir <- in.dir <- paste(wd, 'input', sep="/")
+in.dir <- paste(wd, 'input', sep="/")
 in.files <- list.files(paste(in.dir), pattern = "PeakTable", full.names = TRUE)            #list all PeakTable files
 source("config.R")                                                           #source config file
 
@@ -37,11 +37,15 @@ labchip <- labchip %>% filter(`Size..BP.` >= min_size) #remove fragments below m
 labchip <- labchip %>% filter(`Size..BP.` <= max_size) #remove fragments above upper limit
 
 #generate output ----
-out.dir <- substr(in.dir[1],1,nchar(in.dir[1])-4)                             #remove .xls suffix
-write.csv(labchip, paste(format(Sys.time(), "%Y-%m-%d_%H-%M-%S"), "bp", min_size, max_size, "labchip_unfiltered_output.csv", sep = "_"), row.names = FALSE)
+out.dir <- paste(wd, "output", sep ="/") 
+out.dir2 <- paste(format(Sys.time(), "%Y-%m-%d_%H-%M-%S"), "bp", min_size, max_size, "labchip_unfiltered_output.csv", sep = "_")
+out.dir3 <- paste(format(Sys.time(), "%Y-%m-%d_%H-%M-%S"), "bp", min_size, max_size, "labchip_filtered_output.csv", sep = "_")
 
+write.csv(labchip, paste(out.dir, out.dir2, sep ="/"), row.names = F)
 
 #generate filtered data with number of fragments
-labchip_filt <- labchip  %>% group_by(`Well Position`) %>%
+labchip_filtered <- labchip  %>% group_by(`Well Position`) %>%
   dplyr::summarise(fragment_count = n(),`Total Conc` = sum(`Conc...ng.ul.`))
-write.csv(labchip, paste(format(Sys.time(), "%Y-%m-%d_%H-%M-%S"), "bp", min_size, max_size, "labchip_filtered_output.csv", sep = "_"), row.names = FALSE)
+
+
+write.csv(labchip_filtered, paste(out.dir, out.dir3), row.names = F)
