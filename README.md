@@ -13,8 +13,8 @@ This repository contains a simple script for converting [LabChip GX Touch](https
 
 3) Run `labchip.R` 
   - 2 output files will be produced:
-      - Every fragment within the `min_size` and `max_size` with its own row: `_raw_output.csv`
-      - Fragments summarised into total concentration (ng/ul), with one row per sample: `_summarised_output.csv`
+      - `*_raw_output.csv`: One row per fragment, filtered by `min_size` and `max_size`
+      - `*_summarised_output.csv`: One row per sample; fragments filtered and summarised into total concentration (ng/ul)
 
 
 ## Authors and contributors
