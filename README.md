@@ -9,10 +9,12 @@ This repository contains a simple script for converting [LabChip GX Touch](https
 
 1) Export sample data from Labchip reviewer software and place all resulting files in the `input` directory
 
-2) Open the `Config.R` and set the `min_size` and `max_size` in bp for the fragments of interest
+2) Open `Config.R` in any text editor and set the `min_size` and `max_size` in bp for the fragments of interest
 
 3) Run `labchip.R` 
-  - Output file will have the suffix 
+  - 2 output files will be produced:
+      - `*_raw_output.csv`: One row per fragment, filtered by `min_size` and `max_size`
+      - `*_summarised_output.csv`: One row per sample; fragments filtered and summarised into total concentration (ng/ul)
 
 
 ## Authors and contributors
